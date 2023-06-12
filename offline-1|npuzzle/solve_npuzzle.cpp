@@ -288,26 +288,25 @@ void solve_npuzzle_hamming(Board *_initial_board, ostream &_cout = cout)
         priority_queue<pair<int, Board *>, vector<pair<int, Board *>>, greater<pair<int, Board *>>> hamming_queue;
         int number_of_moves = 0, number_of_explored_boards = 0, number_of_expanded_boards = 0;
         Board *goal_board = nullptr;
-        hamming_queue.push({number_of_moves + _initial_board->get_hamming_distance(), _initial_board});
+        hamming_queue.push({_initial_board->get_hamming_distance(), _initial_board});
         while (!hamming_queue.empty())
         {
             Board *current_board = hamming_queue.top().second;
+            int simple_distance = hamming_queue.top().first - current_board->get_hamming_distance();
             hamming_queue.pop();
             if (current_board->is_goal_board())
             {
                 goal_board = current_board;
                 break;
             }
-            number_of_moves++;
             number_of_expanded_boards++;
             auto reachable_boards = current_board->get_reachable_boards();
             for (auto reachable_board : reachable_boards)
             {
-                hamming_queue.push({number_of_moves + reachable_board->get_hamming_distance(), reachable_board});
+                hamming_queue.push({simple_distance + 1 + reachable_board->get_hamming_distance(), reachable_board});
                 number_of_explored_boards++;
             }
         }
-        _cout << "\nNumber of moves: " << number_of_moves << "\nNumber of explored boards: " << number_of_explored_boards << "\nNumber of expanded boards: " << number_of_expanded_boards << "\n";
         Board *current_move = goal_board;
         stack<Board *> moves;
         while (current_move != nullptr)
@@ -315,6 +314,8 @@ void solve_npuzzle_hamming(Board *_initial_board, ostream &_cout = cout)
             moves.push(current_move);
             current_move = current_move->get_parent();
         }
+        number_of_moves = int(moves.size()) - 1;
+        _cout << "\nMinimum number of moves: " << number_of_moves << "\nNumber of explored boards: " << number_of_explored_boards << "\nNumber of expanded boards: " << number_of_expanded_boards << "\n";
         while (!moves.empty())
         {
             _cout << *moves.top();
@@ -334,26 +335,25 @@ void solve_npuzzle_manhattan(Board *_initial_board, ostream &_cout = cout)
         priority_queue<pair<int, Board *>, vector<pair<int, Board *>>, greater<pair<int, Board *>>> manhattan_queue;
         int number_of_moves = 0, number_of_explored_boards = 0, number_of_expanded_boards = 0;
         Board *goal_board = nullptr;
-        manhattan_queue.push({number_of_moves + _initial_board->get_manhattan_distance(), _initial_board});
+        manhattan_queue.push({_initial_board->get_manhattan_distance(), _initial_board});
         while (!manhattan_queue.empty())
         {
             Board *current_board = manhattan_queue.top().second;
+            int simple_distance = manhattan_queue.top().first - current_board->get_manhattan_distance();
             manhattan_queue.pop();
             if (current_board->is_goal_board())
             {
                 goal_board = current_board;
                 break;
             }
-            number_of_moves++;
             number_of_expanded_boards++;
             auto reachable_boards = current_board->get_reachable_boards();
             for (auto reachable_board : reachable_boards)
             {
-                manhattan_queue.push({number_of_moves + reachable_board->get_manhattan_distance(), reachable_board});
+                manhattan_queue.push({simple_distance + 1 + reachable_board->get_manhattan_distance(), reachable_board});
                 number_of_explored_boards++;
             }
         }
-        _cout << "\nNumber of moves: " << number_of_moves << "\nNumber of explored boards: " << number_of_explored_boards << "\nNumber of expanded boards: " << number_of_expanded_boards << "\n";
         Board *current_move = goal_board;
         stack<Board *> moves;
         while (current_move != nullptr)
@@ -361,6 +361,9 @@ void solve_npuzzle_manhattan(Board *_initial_board, ostream &_cout = cout)
             moves.push(current_move);
             current_move = current_move->get_parent();
         }
+        number_of_moves = int(moves.size()) - 1;
+        _cout << "\nMinimum number of moves: " << number_of_moves << "\nNumber of explored boards: " << number_of_explored_boards << "\nNumber of expanded boards: " << number_of_expanded_boards << "\n";
+        // _cout << "\nMinimum number of moves: " << number_of_moves << "\n";
         while (!moves.empty())
         {
             _cout << *moves.top();
@@ -374,8 +377,8 @@ int main()
     ifstream in("input.txt");
     ofstream out("output.txt");
     Board *initial_board = new Board();
-    in >> (*initial_board);
-    solve_npuzzle_hamming(initial_board);
-    // solve_npuzzle_manhattan(initial_board);
+    cin >> (*initial_board);
+    // solve_npuzzle_hamming(initial_board);
+    solve_npuzzle_manhattan(initial_board);
     return 0;
 }

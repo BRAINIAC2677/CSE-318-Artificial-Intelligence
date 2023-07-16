@@ -9,6 +9,7 @@ private:
     int move_count;
     int player1_depth;
     int player2_depth;
+    int visited_node_count;
     GameState previous_game_state;
     GameState current_game_state;
     GameState next_game_state;
@@ -23,8 +24,11 @@ private:
 
 public:
     Game(int _player1_depth, int _player2_depth, Heuristic *_player1_heuristic, Heuristic *_player2_heuristic);
+    int get_move_count();
+    GameState get_current_game_state();
     bool has_game_ended();
-    bool make_move();
+    long long make_move();
+    long long make_move(int _pit);
     int get_player1_score();
     int get_player2_score();
     int get_game_winner();

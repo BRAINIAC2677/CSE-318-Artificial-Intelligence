@@ -21,4 +21,16 @@ public:
     int evaluate(GameState _game_state, int _player);
 };
 
+class Heuristic3 : public Heuristic
+{
+public:
+    int evaluate(GameState _game_state, int _player);
+};
+
+class Heuristic4 : public Heuristic
+{
+public:
+    int evaluate(GameState _game_state, int _player);
+};
+
 #endif

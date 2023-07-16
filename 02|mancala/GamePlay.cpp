@@ -78,6 +78,44 @@ Game GamePlay::simulate_game()
     return game;
 }
 
+GameAnalytics GamePlay::play_manual_game(int _human_player)
+{
+    Game game = Game(this->player1_depth, this->player2_depth, this->player1_heuristic, this->player2_heuristic);
+    while (game.has_game_ended() == false)
+    {
+        game.print_game_board();
+        if (game.get_current_game_state().get_current_player() == _human_player)
+        {
+            int pit;
+            while (cin >> pit)
+            {
+                if (game.get_current_game_state().is_valid_move(pit))
+                {
+                    game.make_move(pit);
+                    break;
+                }
+                cout << "Invalid move.\nValid moves for current player are:\n";
+                for (int i = 0; i < 14; i++)
+                {
+                    if (game.get_current_game_state().is_valid_move(i))
+                    {
+                        cout << i << " ";
+                    }
+                }
+                cout << "\n";
+            }
+        }
+        else
+        {
+            game.make_move();
+        }
+    }
+    game.print_game_board();
+    GameAnalytics game_analytics;
+    game_analytics.add_game(game);
+    return game_analytics;
+}
+
 GameAnalytics GamePlay::play_games(int _game_count)
 {
     GameAnalytics game_analytics;

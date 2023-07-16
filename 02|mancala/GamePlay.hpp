@@ -29,6 +29,7 @@ public:
     Heuristic *get_player1_heuristic();
     Heuristic *get_player2_heuristic();
 
+    GameAnalytics play_manual_game(int _human_player);
     GameAnalytics play_games(int _game_count);
     GameAnalytics simulate_games(int _game_count);
 };

@@ -15,12 +15,12 @@ enum class GameType
 Heuristic *heuristics[] = {nullptr, new Heuristic1(), new Heuristic2, new Heuristic3, new Heuristic4};
 
 // configurations
-GameType game_type = GameType::SIMULATE_AI_VS_HUMAN;
-int player1_depth = 5;
-int player2_depth = 6;
+GameType game_type = GameType::SIMULATE_HUMAN_VS_AI;
+int player1_depth = 4;
+int player2_depth = 4;
 int game_count = 20;
-int player1_heuristic = 2;
-int player2_heuristic = 2;
+int player1_heuristic = 1;
+int player2_heuristic = 3;
 // end of configurations
 
 void print_game_configs()

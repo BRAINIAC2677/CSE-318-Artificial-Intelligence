@@ -9,14 +9,13 @@ using namespace std;
 
 class StatisticsGenerator
 {
-    ofstream statistics_file;
+    int number_of_iterations;
+    ofstream output_file;
 
 public:
-    StatisticsGenerator() {}
-    StatisticsGenerator(int _n) {}
-    StatisticsGenerator(string _statistics_file_name);
+    StatisticsGenerator(string _output_file_name);
     void generate_statistics(Graph _graph);
-    void generate_statistics(ifstream &_input_file);
+    void generate_statistics(string _input_file_name);
 };
 
 #endif

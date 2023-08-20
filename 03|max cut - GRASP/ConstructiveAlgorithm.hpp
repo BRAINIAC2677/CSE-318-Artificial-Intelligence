@@ -20,29 +20,31 @@ public:
     long long get_maxcut();
 };
 
-// greedy construction
-class GreedyConstructiveAlgorithm : public ConstructiveAlgorithm
-{
-public:
-    GreedyConstructiveAlgorithm(Graph _graph);
-    vector<int> construct();
-};
-
-// cardinality based semi greedy construction
-class SemiGreedyConstructiveAlgorithm : public ConstructiveAlgorithm
-{
-    int cardinality;
-
-public:
-    SemiGreedyConstructiveAlgorithm(Graph _graph);
-    void set_cardinality(int _cardinality);
-    vector<int> construct();
-};
-
 class RandomConstructiveAlgorithm : public ConstructiveAlgorithm
 {
 public:
     RandomConstructiveAlgorithm(Graph _graph);
+    vector<int> construct();
+};
+
+class SemiGreedyConstructiveAlgorithm1 : public ConstructiveAlgorithm
+{
+    int cardinality;
+
+public:
+    SemiGreedyConstructiveAlgorithm1(Graph _graph);
+    void set_cardinality(int _cardinality);
+    vector<int> construct();
+};
+
+class SemiGreedyConstructiveAlgorithm2 : public ConstructiveAlgorithm
+{
+    double alpha;
+    void calculate_sigma_values(vector<pair<long long, long long>> &_sigma_values, vector<int> _assignment);
+
+public:
+    SemiGreedyConstructiveAlgorithm2(Graph _graph);
+    void set_alpha(double _alpha);
     vector<int> construct();
 };
 

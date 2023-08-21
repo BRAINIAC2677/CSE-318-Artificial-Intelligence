@@ -15,6 +15,7 @@ ClassicalLocalSearch::ClassicalLocalSearch(Graph _graph) : LocalSearch(_graph)
 {
 }
 
+// time complexity: O(n*m*k) where k is the number of iterations until convergence
 vector<int> ClassicalLocalSearch::search(vector<int> _assignment, int &_number_of_iterations)
 {
     _number_of_iterations = 0;
@@ -40,6 +41,7 @@ vector<int> ClassicalLocalSearch::search(vector<int> _assignment, int &_number_o
     return _assignment;
 }
 
+// time complexity: O(k*m) where k is the number of iterations until convergence
 vector<int> ClassicalLocalSearch::optimized_search(vector<int> _assignment, int &_number_of_iterations)
 {
     _number_of_iterations = 0;

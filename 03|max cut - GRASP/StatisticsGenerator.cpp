@@ -73,18 +73,21 @@ void StatisticsGenerator::generate_statistics(Graph _graph)
     long long random_local_search_maxcut = 0;
     vector<int> assignment = random_constructive_algorithm.construct();
     assignment = classical_local_search.optimized_search(assignment, n_iter1);
+    // assignment = classical_local_search.search(assignment, n_iter1);
     random_local_search_maxcut = classical_local_search.get_graph().get_maxcut(assignment);
 
     int n_iter2;
     long long semi_greedy_local_search_maxcut1 = 0;
     assignment = semi_greedy_constructive_algorithm1.construct();
     assignment = classical_local_search.optimized_search(assignment, n_iter2);
+    // assignment = classical_local_search.search(assignment, n_iter2);
     semi_greedy_local_search_maxcut1 = classical_local_search.get_graph().get_maxcut(assignment);
 
     int n_iter3;
     long long semi_greedy_local_search_maxcut2 = 0;
     assignment = semi_greedy_constructive_algorithm2.construct();
     assignment = classical_local_search.optimized_search(assignment, n_iter3);
+    // assignment = classical_local_search.search(assignment, n_iter3);
     semi_greedy_local_search_maxcut2 = classical_local_search.get_graph().get_maxcut(assignment);
 
     long long random_grasp_maxcut = -inf;
@@ -93,6 +96,7 @@ void StatisticsGenerator::generate_statistics(Graph _graph)
         vector<int> assignment = random_constructive_algorithm.construct();
         int n_iter;
         assignment = classical_local_search.optimized_search(assignment, n_iter);
+        // assignment = classical_local_search.search(assignment, n_iter);
         random_grasp_maxcut = max(random_grasp_maxcut, classical_local_search.get_graph().get_maxcut(assignment));
     }
 
@@ -102,6 +106,7 @@ void StatisticsGenerator::generate_statistics(Graph _graph)
         vector<int> assignment = semi_greedy_constructive_algorithm1.construct();
         int n_iter;
         assignment = classical_local_search.optimized_search(assignment, n_iter);
+        // assignment = classical_local_search.search(assignment, n_iter);
         semi_greedy_grasp_maxcut1 = max(semi_greedy_grasp_maxcut1, classical_local_search.get_graph().get_maxcut(assignment));
     }
 
@@ -111,6 +116,7 @@ void StatisticsGenerator::generate_statistics(Graph _graph)
         vector<int> assignment = semi_greedy_constructive_algorithm2.construct();
         int n_iter;
         assignment = classical_local_search.optimized_search(assignment, n_iter);
+        // assignment = classical_local_search.search(assignment, n_iter);
         semi_greedy_grasp_maxcut2 = max(semi_greedy_grasp_maxcut2, classical_local_search.get_graph().get_maxcut(assignment));
     }
 

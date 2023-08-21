@@ -74,6 +74,7 @@ void SemiGreedyConstructiveAlgorithm1::set_cardinality(int _cardinality)
     this->cardinality = _cardinality;
 }
 
+// time complexity: O(m*log(m))
 vector<int> SemiGreedyConstructiveAlgorithm1::construct()
 {
     this->cardinality = min(this->cardinality, this->graph.m);
@@ -135,6 +136,7 @@ void SemiGreedyConstructiveAlgorithm2::set_alpha(double _alpha)
     this->alpha = _alpha;
 }
 
+// time complexity: O(m*log(m) + n*log(n))
 vector<int> SemiGreedyConstructiveAlgorithm2::construct()
 {
     vector<int> assignment(this->graph.n, -1);

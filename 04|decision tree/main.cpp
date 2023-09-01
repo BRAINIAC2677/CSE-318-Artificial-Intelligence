@@ -28,9 +28,14 @@ vector<string> get_splitted_values(string line)
     return values;
 }
 
-int main()
+int main(int argc, char **argv)
 {
-    string dataset_file = "car evaluation dataset/car.data";
+    if (argc != 2)
+    {
+        cout << "Usage: " << argv[0] << " <dataset_file>" << endl;
+        return 0;
+    }
+    string dataset_file = argv[1];
     ifstream fin(dataset_file);
     vector<string> attribute_names = {"buying", "maint", "doors", "persons", "lug_boot", "safety", "class"};
     vector<map<string, string>> dataset;
